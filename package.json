@@ -4,6 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
+    "dev": "node node_modules/http-server/bin/http-server ./build -p 9001 -o",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "gulp-unzip": "^1.0.0",
     "gulp-watch": "^4.3.9",
     "gulp-zip": "^3.2.0",
+    "http-server": "^0.11.1",
     "mkdirp": "^0.5.1"
   }
 }
