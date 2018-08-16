@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var cssmin = require('gulp-cssmin');
 var concat = require('gulp-concat');
@@ -9,6 +8,10 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 var chalk = require('chalk');
 var watch = require('gulp-watch');
+
+const uglifyes = require('uglify-es');
+const composer = require('gulp-uglify/composer');
+const uglify = composer(uglifyes, console);
 
 //Chalk colors
 var error = chalk.bold.red;
@@ -47,10 +50,17 @@ gulp.task('unzip', function(){
 })
 
 gulp.task('build-js', (done) => {
-	return gulp.src('./src/js/**/*.js')
+	return gulp.src([
+			'./src/js/Engine/Game.js',
+			'./src/js/Engine/System.js',
+			'./src/js/Engine/Input.js',
+			'./src/js/Engine/Entity.js',
+			'./src/js/Game/Entities/*.js',
+			'./src/js/Game/*.js'
+		])
 		.pipe(concat('game.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('./build/'));
+		.pipe(gulp.dest('./build/'))
 });
 
 gulp.task('build-html', (done) => {
